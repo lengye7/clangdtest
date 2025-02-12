@@ -1,0 +1,42 @@
+{
+    "clangd.arguments": [
+        "--compile-commands-dir=build", //compile_commands.json文件所在的目录（这里配置为build，这是相对于CMakeLists.txt文件的相对目录,它是CMakeLists.txt文件所在目录的子目录。），在使用cmake构建软件的时候，一般都会在一个目录下构建该文件，根据项目的具体配置设置该配置。
+        //"--query-driver=", //编译器的路径，一般不用设置。可以设置多个编译器，使用逗号隔开，clangd通过编译器获取系统头文件，从而补全系统头文件符号。
+        "--background-index", //开启后台获取项目的符号，并持久化到硬盘。
+        "--background-index-priority=normal", //后台获取项目符号的任务的优先级，一般现在电脑的性能都过剩，直接设置为normal即可。
+        "--clang-tidy", //使用clang-tidy诊断错误。
+        "--completion-style=detailed", //补全的时候给出详细的补全信息，也可以设置为bundled，从而减少输出信息。
+        "--function-arg-placeholders", //函数补全的时候给出参数的占位符。
+        //"--limit-references=<int>", //限制clangd的references的数量，0表示不限制，默认值是1000。一般不用设置。
+        //"--limit-results=<int>", //限制clangd的返回结果的数量，0表示不限制，默认值为100。一般不用设置。
+        //"--rename-file-limit=<int>", //限制重命名符号的时候，影响的文件的数量，0表示不限制，默认值为50。一般不用设置。总的来说，这三个都是大型项目的时候才需要设置。
+        //"--enable-config", //该配置允许在.clangd文件(当前项目文件夹)中添加编译选项，从而使得clangd可以使用其中的选项编译文件。.clangd文件必须是YMAL格式。更加具体的信息可以通过`clangd --help`得到。一般情况下，不要开启这种方式的编译选项添加。
+        "-j=4", //值是无符号整数，表示clangd可使用的async workers。一般设置为CPU的核心数。
+        "--pch-storage=memory", //设置为memory会消耗更多的内存，但是性能会更好。
+        "--log=verbose", //日志输出的程度，这个配置会输出更加底层的日志。
+        "--pretty"
+    ],
+    "clangd.checkUpdates": false,
+    "clangd.detectExtensionConflicts": true,
+    "clangd.enableCodeCompletion": true,
+    "clangd.fallbackFlags": [], //设置clangd用于编译项目文件的编译选项，一般情况下不通过此选项设置。
+    "clangd.inactiveRegions.opacity": 0.55,
+    "clangd.inactiveRegions.useBackgroundHighlight": false,
+    "clangd.onConfigChanged": "prompt",
+    "clangd.path": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\Llvm\\x64\\bin\\clangd.exe",
+    "clangd.restartAfterCrash": true,
+    "clangd.serverCompletionRanking": true,
+    "clangd.trace": "",
+    //增加如下项目配置
+    //这里仅仅只让clang-format针对cpp语言生效。
+    "[cpp]": {
+        // 在cpp文件中，编辑器在保存的时候进行格式化
+        "editor.formatOnSave": true,
+        // 在cpp文件中，编辑器在打字的时候不进行格式化。如果在打字的时候格式化，可能导致一些莫名其妙的问题。
+        "editor.formatOnType": false,
+        // 在cpp文件中，编辑器在粘贴的时候进行格式化
+        "editor.formatOnPaste": true,
+        // 在cpp文件中，编辑器的默认格式化器为 "clangd"
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
+    }
+}
