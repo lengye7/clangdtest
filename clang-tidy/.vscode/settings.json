@@ -35,7 +35,7 @@
         // 在cpp文件中，编辑器在打字的时候不进行格式化。如果在打字的时候格式化，可能导致一些莫名其妙的问题。
         "editor.formatOnType": false,
         // 在cpp文件中，编辑器在粘贴的时候进行格式化
-        "editor.formatOnPaste": true,
+        "editor.formatOnPaste": false,
         // 在cpp文件中，编辑器的默认格式化器为 "clangd"
         "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd"
     }
